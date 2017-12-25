@@ -42,9 +42,13 @@ void CallBackFuncDst(int event, int x, int y, int flags, void* userdata)
 
 int main( int argc, char** argv)
 {
+	string imgSrcPath, imgDstPath;
+	cout << "Type Source image path : ";
+	getline(cin, imgSrcPath);
+
 	cout << "Click 4 points above source image." << endl;
     // Read source image.
-    Mat imgSrc = imread("sample_src.jpg");
+    Mat imgSrc = imread(imgSrcPath);
     resize(imgSrc, imgSrc, Size(RESIZED_WIDTH, RESIZED_HEIGHT));
 
 	//if fail to read the image
@@ -56,26 +60,23 @@ int main( int argc, char** argv)
 
 	//Create a window
 	namedWindow(SRC_WINDOW, CV_WINDOW_AUTOSIZE);
-
 	//set the callback function for any mouse event
 	setMouseCallback(SRC_WINDOW, CallBackFuncSrc, NULL);
-
 	//Show source sample
 	imshow(SRC_WINDOW, imgSrc);
-
 	// Wait for selecting corners.
 	waitKey(0);
 
-    // Read destination image.
-    Mat imgDst = imread("sample_dst.jpg");
-    resize(imgDst, imgDst, Size(RESIZED_WIDTH, RESIZED_HEIGHT));
+	cout << "Type Destination image path : ";
+	getline(cin, imgDstPath);
 
+    // Read destination image.
+    Mat imgDst = imread(imgDstPath);
+    resize(imgDst, imgDst, Size(RESIZED_WIDTH, RESIZED_HEIGHT));
 	//Create a window
 	namedWindow(DST_WINDOW, CV_WINDOW_AUTOSIZE);
-
 	//set the callback function for any mouse event
 	setMouseCallback(DST_WINDOW, CallBackFuncDst, NULL);
-
 	//Show destination sample
 	imshow(DST_WINDOW, imgDst);
 
